@@ -22,7 +22,7 @@ export default function Home() {
     
     <div className="flex flex-col items-center space-y-4">
 
-      <h1 className="text-2xl font-bold mb-4">Heres my counter</h1>
+      <h1 className="text-2xl font-bold mb-4">Here is my counter</h1>
       <Counter />
 
       <h1 className="text-2xl font-bold">Ollama AI Chat</h1>
@@ -31,15 +31,15 @@ export default function Home() {
         value={prompt}
         onChange={(e) => setPrompt(e.target.value)}
         placeholder="Enter your prompt"
-        className="px-4 py-2 border rounded"
+        className="px-4 py-2 border rounded text-black"
       />
       <button
         onClick={sendPrompt}
-        className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700"
+        className="px-4 py-2 bg-blue-500 text-black rounded hover:bg-blue-700"
       >
         Send
       </button>
-      <div className="mt-4 p-4 border rounded bg-gray-100">
+      <div className="mt-4 p-4 border rounded bg-gray-100 text-black">
         <strong>Response:</strong> {response}
       </div>
     </div>
