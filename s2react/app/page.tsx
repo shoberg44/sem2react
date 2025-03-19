@@ -3,6 +3,32 @@ import Counter from "./components/Counter";
 import { useState } from "react";
 
 export default function Home() {
+  
+  const [filename, setFileName] = useState("");
+
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]; // Get the first uploaded file
+    if (!file) return; // If no file is selected, do nothing
+  
+    setFileName(file.name); // Store file name in state
+  
+    const reader = new FileReader(); // Create a new FileReader instance
+  
+    reader.onload = (event) => {
+      const content = event.target?.result; // Get file content as text
+      // Handle different file types
+      if (file.type === "application/pdf") {
+        // For PDF files, we'll need server-side processing
+        const formData = new FormData();
+        formData.append("file", file);
+      } else {
+        reader.readAsText(file)
+      }
+    }
+
+  }
+
+
   const [response, setResponse] = useState("");
   const [prompt, setPrompt] = useState("");
 
