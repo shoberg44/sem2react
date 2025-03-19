@@ -16,14 +16,18 @@ export default function Home() {
   
     reader.onload = (event) => {
       const content = event.target?.result; // Get file content as text
-      // Handle different file types
-      if (file.type === "application/pdf") {
-        // For PDF files, we'll need server-side processing
-        const formData = new FormData();
-        formData.append("file", file);
-      } else {
-        reader.readAsText(file)
-      }
+      console.log("File content:", content);
+      //setFileContent(content); // state not yet implemented
+    }
+
+    // Handle different file types
+    if (file.type === "application/pdf") {
+      // For PDF files, we'll need server-side processing
+      const formData = new FormData();
+      formData.append("file", file);
+      //process pdf
+    } else {
+      reader.readAsText(file)
     }
 
   }
@@ -50,6 +54,11 @@ export default function Home() {
 
       <h1 className="text-2xl font-bold mb-4">Here is my counter</h1>
       <Counter />
+      <input 
+        type="file" 
+        onChange={handleFileChange} 
+        className="px-4 py-2 border rounded"
+      />
 
       <h1 className="text-2xl font-bold">Ollama AI Chat</h1>
       <input
