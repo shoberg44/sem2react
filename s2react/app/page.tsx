@@ -4,19 +4,19 @@ import { useState } from "react";
 
 export default function Home() {
   
-  const [filename, setFileName] = useState("");
+  const [file, setFile] = useState(null);
 
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0]; // Get the first uploaded file
-    if (!file) return; // If no file is selected, do nothing
-  
-    setFileName(file.name); // Store file name in state
-  
+    
+    if (e.target.files == null) return;
+    
+    const file = e.target.files[0]; // Get the first uploaded file
+
     const reader = new FileReader(); // Create a new FileReader instance
-  
     reader.onload = (event) => {
-      const content = event.target?.result; // Get file content as text
-      console.log("File content:", content);
+      const content = event.target.result; // Get file content as text
+      
+      setFile(content); // Store file name in state
       //setFileContent(content); // state not yet implemented
     }
 
@@ -55,10 +55,19 @@ export default function Home() {
       <h1 className="text-2xl font-bold mb-4">Here is my counter</h1>
       <Counter />
       <input 
-        type="file" 
-        onChange={handleFileChange} 
+        type="file"
+        onChange={handleFileChange}
         className="px-4 py-2 border rounded"
       />
+
+      <button
+        onClick={() => {
+          console.log("File content:", file);
+        }}
+        className="px-4 py-2 bg-blue-500 text-black rounded hover:bg-blue-700"
+      >
+        Parse File
+      </button>
 
       <h1 className="text-2xl font-bold">Ollama AI Chat</h1>
       <input
